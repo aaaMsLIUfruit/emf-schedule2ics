@@ -1,0 +1,6 @@
+interface:
+  display_name: "EMF-schedule2ics"
+  short_description: "Convert course schedules into verified ICS files"
+  default_prompt: "Use $emf-schedule2ics to convert this course schedule into a verified calendar.ics file."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,56 @@
+{
+  "occurrences": [
+    {
+      "event_id": "event_002",
+      "segment_id": "seg_001",
+      "title": "Corporate Finance",
+      "location": "Room B102",
+      "instructor": "",
+      "description": "Sources: pdf_page_001",
+      "date": "2026-09-07",
+      "start": "14:00",
+      "end": "15:30",
+      "timezone": "Asia/Shanghai",
+      "uid": "0f785938f71321a1c6d7a084@emf-schedule2ics"
+    },
+    {
+      "event_id": "event_001",
+      "segment_id": "seg_001",
+      "title": "Machine Learning",
+      "location": "Room A201",
+      "instructor": "",
+      "description": "Sources: pdf_page_001",
+      "date": "2026-09-08",
+      "start": "10:10",
+      "end": "11:45",
+      "timezone": "Asia/Shanghai",
+      "uid": "3320a27ed9542accc6a1103a@emf-schedule2ics"
+    },
+    {
+      "event_id": "event_002",
+      "segment_id": "seg_001",
+      "title": "Corporate Finance",
+      "location": "Room B102",
+      "instructor": "",
+      "description": "Sources: pdf_page_001",
+      "date": "2026-09-14",
+      "start": "14:00",
+      "end": "15:30",
+      "timezone": "Asia/Shanghai",
+      "uid": "5a5477f8aadda84b1afe7d00@emf-schedule2ics"
+    },
+    {
+      "event_id": "event_001",
+      "segment_id": "seg_001",
+      "title": "Machine Learning",
+      "location": "Room A201",
+      "instructor": "",
+      "description": "Sources: pdf_page_001",
+      "date": "2026-09-22",
+      "start": "10:10",
+      "end": "11:45",
+      "timezone": "Asia/Shanghai",
+      "uid": "3f0fac7330e337d422b70169@emf-schedule2ics"
+    }
+  ]
+}

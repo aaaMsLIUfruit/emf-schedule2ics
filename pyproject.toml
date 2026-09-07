@@ -1,0 +1,14 @@
+[project]
+name = "emf-schedule2ics"
+version = "0.1.0"
+description = "Agent skill scripts for converting course schedules into verified ICS calendars."
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+pdf = ["pymupdf>=1.23", "pypdfium2>=4.25", "pdf2image>=1.17"]
+schema = ["jsonschema>=4.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

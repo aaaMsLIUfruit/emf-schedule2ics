@@ -1,0 +1,8 @@
+# Core scripts use only the Python standard library.
+# Optional PDF renderers, in fallback order:
+pymupdf>=1.23
+pypdfium2>=4.25
+pdf2image>=1.17
+
+# Optional JSON Schema validation; scripts fall back to built-in checks if absent.
+jsonschema>=4.0

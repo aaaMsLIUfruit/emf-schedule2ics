@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emf-schedule2ics/schedule.schema.json",
+  "title": "EMF-schedule2ics canonical schedule",
+  "type": "object",
+  "required": ["schema_version", "semester", "events"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "semester": {
+      "type": "object",
+      "required": ["start_date", "end_date", "timezone"],
+      "additionalProperties": true,
+      "properties": {
+        "start_date": {"type": "string", "format": "date"},
+        "end_date": {"type": "string", "format": "date"},
+        "week_1_start_date": {"type": "string", "format": "date"},
+        "timezone": {"type": "string"}
+      }
+    },
+    "periods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "start", "end"],
+        "additionalProperties": true,
+        "properties": {
+          "index": {"type": "integer", "minimum": 1},
+          "start": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"},
+          "end": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"}
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "events": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/event"}
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "visual_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/visual_candidate"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["source_id", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "type": {
+          "type": "string",
+          "enum": ["pdf", "pdf_page", "image", "text", "notice", "syllabus", "chat", "manual"]
+        },
+        "path": {"type": "string"},
+        "description": {"type": "string"},
+        "captured_at": {"type": "string"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["source_id"],
+      "additionalProperties": true,
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "description": {"type": "string"},
+        "page": {"type": "integer", "minimum": 1},
+        "region_id": {"type": "string"}
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["title", "segments"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string"},
+        "title": {"type": "string", "minLength": 1},
+        "location": {"type": "string"},
+        "instructor": {"type": "string"},
+        "description": {"type": "string"},
+        "status": {"type": "string", "enum": ["confirmed", "tentative", "unresolved"]},
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/segment"}
+        }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "required": ["time"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string"},
+        "time": {
+          "oneOf": [
+            {"$ref": "#/$defs/period_time"},
+            {"$ref": "#/$defs/absolute_time"},
+            {"$ref": "#/$defs/absolute_date_time"},
+            {"$ref": "#/$defs/unresolved_time"}
+          ]
+        },
+        "weeks": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1},
+          "uniqueItems": true
+        },
+        "dates": {
+          "type": "array",
+          "items": {"type": "string", "format": "date"},
+          "uniqueItems": true
+        },
+        "week_expression": {"type": "string"},
+        "location": {"type": "string"},
+        "instructor": {"type": "string"},
+        "description": {"type": "string"},
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "unresolved": {"type": "object"}
+      }
+    },
+    "period_time": {
+      "type": "object",
+      "required": ["mode", "weekday", "start_period", "end_period"],
+      "additionalProperties": true,
+      "properties": {
+        "mode": {"const": "period"},
+        "weekday": {"type": "integer", "minimum": 1, "maximum": 7},
+        "start_period": {"type": "integer", "minimum": 1},
+        "end_period": {"type": "integer", "minimum": 1}
+      }
+    },
+    "absolute_time": {
+      "type": "object",
+      "required": ["mode", "weekday", "start", "end"],
+      "additionalProperties": true,
+      "properties": {
+        "mode": {"const": "absolute"},
+        "weekday": {"type": "integer", "minimum": 1, "maximum": 7},
+        "start": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"},
+        "end": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"}
+      }
+    },
+    "absolute_date_time": {
+      "type": "object",
+      "required": ["mode", "date", "start", "end"],
+      "additionalProperties": true,
+      "properties": {
+        "mode": {"const": "absolute_date"},
+        "date": {"type": "string", "format": "date"},
+        "start": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"},
+        "end": {"type": "string", "pattern": "^\\d{2}:\\d{2}$"}
+      }
+    },
+    "unresolved_time": {
+      "type": "object",
+      "required": ["mode", "expression"],
+      "additionalProperties": true,
+      "properties": {
+        "mode": {"const": "unresolved"},
+        "expression": {"type": "string", "minLength": 1}
+      }
+    },
+    "visual_candidate": {
+      "type": "object",
+      "required": ["id", "source_id", "weekday", "start_period", "end_period"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "source_id": {"type": "string", "minLength": 1},
+        "weekday": {"type": "integer", "minimum": 1, "maximum": 7},
+        "start_period": {"type": "integer", "minimum": 1},
+        "end_period": {"type": "integer", "minimum": 1},
+        "classification": {"type": "string", "enum": ["course", "non_course", "unknown"]},
+        "matched_event_ids": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

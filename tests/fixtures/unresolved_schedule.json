@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "semester": {
+    "start_date": "2026-09-07",
+    "end_date": "2026-09-27",
+    "timezone": "Asia/Shanghai"
+  },
+  "events": [
+    {
+      "id": "event_001",
+      "title": "TA Session",
+      "segments": [
+        {
+          "id": "seg_001",
+          "time": {"mode": "unresolved", "expression": "Wednesday afternoon"},
+          "unresolved": {"reason": "No exact start/end time"}
+        }
+      ]
+    }
+  ]
+}
