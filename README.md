@@ -29,8 +29,3 @@ calendar.ics
 
 You can import it into Apple Calendar, Google Calendar, Outlook, or other ICS-compatible calendars.
 
-```bash
-python -m unittest discover -s tests -v
-```
-
-No network or external service is needed for the core tests.
